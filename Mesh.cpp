@@ -54,10 +54,12 @@ void Mesh::draw(Shader& shader)
             number = to_string(diffuse_nr++);
         else if (name == "texture_specular")
             number = to_string(specular_nr++);
-
+        
         shader.setInt((name + number).c_str(), i);
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
+    glActiveTexture(GL_TEXTURE0);
 }
