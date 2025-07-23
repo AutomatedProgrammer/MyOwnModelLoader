@@ -11,6 +11,7 @@
                 "glad.c",
                 "-Iinclude",
                 "-lglfw3",
+                "Mesh.cpp",
                 "-lGL",
                 "-lX11",
                 "-lassimp",
