@@ -47,7 +47,7 @@ int main()
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
-   
+    /*
     std::vector<unsigned int> cube_indices = {
         0, 1, 2, 2, 3, 0, // back
         4, 5, 6, 6, 7, 4, // front
@@ -111,6 +111,7 @@ int main()
 
     Mesh cube(cube_vertices, blank, cube_indices);
     Shader shader("cube.vert", "cube.frag");
+    */
     glEnable(GL_DEPTH_TEST);
     // render loop
     // -----------
@@ -126,21 +127,21 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        shader.use();
+        //shader.use();
 
         glm::mat4 model = glm::mat4(1.0f);
         glm::mat4 view = glm::mat4(1.0f);
         glm::mat4 projection = glm::mat4(1.0f);
 
-        model = glm::rotate(model, -(float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(30.0f), glm::vec3(1.0f, 1.0f, 0.0f));
         view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
         projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
-        shader.setMat4("view", view);
-        shader.setMat4("projection", projection);
-        shader.setMat4("model", model);
+        //shader.setMat4("view", view);
+        //shader.setMat4("projection", projection);
+        //shader.setMat4("model", model);
         
-        cube.draw(shader);
+        //cube.draw(shader);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
