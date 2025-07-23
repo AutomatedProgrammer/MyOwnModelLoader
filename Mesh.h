@@ -2,6 +2,7 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include <string>
+#include "Shader.h"
 
 using namespace std;
 
@@ -27,7 +28,7 @@ class Mesh
     vector<unsigned int> indices;
 
     Mesh(const vector<Vertex>& vertices, const vector<Texture>& textures, const vector<unsigned int>& indices);
-    
+    void draw(Shader& shader);
 
     private:
     unsigned int VAO, VBO, EBO;
