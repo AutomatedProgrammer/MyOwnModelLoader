@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include "Mesh.h"
 #include "Shader.h"
+#include "Model.h"
 
 #include <iostream>
 
@@ -108,10 +109,11 @@ int main()
         cube_vertices.push_back(vertex);
     }
 
-
-    Mesh cube(cube_vertices, blank, cube_indices);
-    Shader shader("cube.vert", "cube.frag");
     */
+    //Mesh cube(cube_vertices, blank, cube_indices);
+    Shader shader("cube.vert", "cube.frag");
+    Model backpack("backpack/backpack.obj");
+    
     glEnable(GL_DEPTH_TEST);
     // render loop
     // -----------
@@ -127,19 +129,21 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        //shader.use();
+        shader.use();
 
         glm::mat4 model = glm::mat4(1.0f);
         glm::mat4 view = glm::mat4(1.0f);
         glm::mat4 projection = glm::mat4(1.0f);
 
-        model = glm::rotate(model, glm::radians(30.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-        view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+        model = glm::rotate(model, (float)glfwGetTime()*glm::radians(30.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.5f, 1.0f, 0.5f));	// it's a bit too big for our scene, so scale it down
+        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -5.0f));
         projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
-        //shader.setMat4("view", view);
-        //shader.setMat4("projection", projection);
-        //shader.setMat4("model", model);
+        shader.setMat4("view", view);
+        shader.setMat4("projection", projection);
+        shader.setMat4("model", model);
+        backpack.draw(shader);
         
         //cube.draw(shader);
 

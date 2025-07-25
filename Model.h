@@ -13,13 +13,14 @@ class Model
     public:
     Model();
     Model(string file_path);
+    void draw(Shader& shader);
 
     private:
     Assimp::Importer importer;
     vector<Mesh> meshes;
     const aiScene* scene = nullptr;
     void process_scene(const aiScene* scene);
-    Mesh process_mesh(aiMesh* mesh);
-    vector<Texture> load_material_textures(aiMaterial *mat, aiTextureType type, string type_name);
-
+    Mesh process_mesh(aiMesh* mesh, const aiScene* scene);
+    vector<Texture> load_material(aiMaterial *mat, aiTextureType type);
+    unsigned int load_texture(string file_path);
 };
