@@ -16,6 +16,7 @@ class Model
     void draw(Shader& shader);
 
     private:
+    string directory;
     Assimp::Importer importer;
     vector<Mesh> meshes;
     const aiScene* scene = nullptr;

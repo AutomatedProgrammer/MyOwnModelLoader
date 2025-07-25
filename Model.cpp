@@ -5,6 +5,7 @@
 Model::Model(string file_path)
 {
     scene = importer.ReadFile(file_path, aiProcess_Triangulate | aiProcess_FlipUVs);
+    directory = file_path.substr(0, file_path.find_last_of('/'));
     process_scene(scene);
 }
 
@@ -65,6 +66,8 @@ void Model::draw(Shader& shader)
 
 unsigned int Model::load_texture(string file_path)
 {
+    string filename = string(file_path);
+    filename = directory + '/' + filename;
     unsigned int texture;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture); 
@@ -74,7 +77,7 @@ unsigned int Model::load_texture(string file_path)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     int width, height, nrChannels;
     stbi_set_flip_vertically_on_load(true);
-    unsigned char *data = stbi_load(file_path.c_str(), &width, &height, &nrChannels, 0);
+    unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrChannels, 0);
     if (data)
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
