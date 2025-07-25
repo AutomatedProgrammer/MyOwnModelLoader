@@ -99,15 +99,31 @@ vector<Texture> Model::load_material(aiMaterial *mat, aiTextureType type)
     {
         aiString str;
         mat->GetTexture(type, i, &str);
-        Texture texture;
-        if (type == aiTextureType_DIFFUSE)
-            texture.type = "texture_diffuse";
-        else
-            texture.type = "unknown";
-        texture.id = load_texture(str.C_Str());
-        texture.path = str.C_Str();
+        bool skip = false;
+        for (unsigned int j = 0; j < loaded_textures.size(); j++)
+        {
+            if (strcmp(str.C_Str(), loaded_textures[j].path.c_str()) == 0)
+            {
+                skip = true;
+                textures.push_back(loaded_textures[j]);
+                break;
+            }
+        }
 
-        textures.push_back(texture);
+        if (!skip)
+        {
+            Texture texture;
+            if (type == aiTextureType_DIFFUSE)
+                texture.type = "texture_diffuse";
+            else
+                texture.type = "unknown";
+            texture.id = load_texture(str.C_Str());
+            texture.path = str.C_Str();
+
+            textures.push_back(texture);
+            loaded_textures.push_back(texture);
+        }
+        
     }
 
     return textures;

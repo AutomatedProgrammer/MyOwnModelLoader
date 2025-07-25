@@ -19,6 +19,7 @@ class Model
     string directory;
     Assimp::Importer importer;
     vector<Mesh> meshes;
+    vector<Texture> loaded_textures;
     const aiScene* scene = nullptr;
     void process_scene(const aiScene* scene);
     Mesh process_mesh(aiMesh* mesh, const aiScene* scene);
