@@ -12,6 +12,7 @@
                 "-Iinclude",
                 "-lglfw3",
                 "Mesh.cpp",
+                "Model.cpp",
                 "-lGL",
                 "-lX11",
                 "-lassimp",
