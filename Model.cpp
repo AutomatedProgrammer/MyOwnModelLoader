@@ -45,8 +45,8 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene)
         for (unsigned int j = 0; j < face->mNumIndices; j++)
             indices.push_back(face->mIndices[j]);
     }
+
     vector<Texture> textures;
-    //Todo: TEXTURES
     if (mesh->mMaterialIndex >= 0)
     {
         aiMaterial *mat = scene->mMaterials[mesh->mMaterialIndex];
@@ -127,5 +127,4 @@ vector<Texture> Model::load_material(aiMaterial *mat, aiTextureType type)
     }
 
     return textures;
-    
 }

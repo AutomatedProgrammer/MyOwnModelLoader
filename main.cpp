@@ -50,7 +50,7 @@ int main()
     }
 
     Shader shader("model.vert", "model.frag");
-    Model backpack("backpack/backpack.obj");
+    Model statue("statue/statue.obj");
     
     glEnable(GL_DEPTH_TEST);
     // render loop
@@ -73,15 +73,18 @@ int main()
         glm::mat4 view = glm::mat4(1.0f);
         glm::mat4 projection = glm::mat4(1.0f);
 
-        model = glm::rotate(model, (float)glfwGetTime()*glm::radians(30.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-        model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
-        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -5.0f));
+        model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 1.0f));
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, -20.0f));
+
+        model = glm::rotate(model, (float)glfwGetTime()*glm::radians(30.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
+        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -50.0f));
         projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
         shader.setMat4("view", view);
         shader.setMat4("projection", projection);
         shader.setMat4("model", model);
-        backpack.draw(shader);
+        statue.draw(shader);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
