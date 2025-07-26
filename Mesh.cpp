@@ -63,10 +63,3 @@ void Mesh::draw(Shader& shader)
     glBindVertexArray(0);
     glActiveTexture(GL_TEXTURE0);
 }
-
-Mesh::~Mesh()
-{
-    glDeleteBuffers(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
-}

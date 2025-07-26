@@ -29,7 +29,6 @@ class Mesh
 
     Mesh(const vector<Vertex>& vertices, const vector<Texture>& textures, const vector<unsigned int>& indices);
     Mesh();
-    ~Mesh();
     void draw(Shader& shader);
 
     private:
