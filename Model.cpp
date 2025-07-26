@@ -5,6 +5,11 @@
 Model::Model(string file_path)
 {
     scene = importer.ReadFile(file_path, aiProcess_Triangulate | aiProcess_FlipUVs);
+    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
+    {
+        cout << "ERROR::ASSIMP::" << importer.GetErrorString() << endl;
+        return;
+    }
     directory = file_path.substr(0, file_path.find_last_of('/'));
     process_scene(scene);
 }
